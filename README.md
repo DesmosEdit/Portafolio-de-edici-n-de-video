@@ -2,6 +2,8 @@
 
 Sitio estático (HTML + CSS + JS, sin instalar nada), listo para GitHub Pages.
 
+🌐 **Sitio publicado:** https://desmosedit.github.io/Portafolio-de-edici-n-de-video/
+
 ## Verlo en local
 
 Doble clic en `index.html`. Listo.
@@ -55,7 +57,7 @@ técnicos (herramientas del navegador) todavía podría sacar el video: por eso 
 3. En el repo: **Settings → Pages → Source: Deploy from a branch → `main` / `(root)`** → Save.
 4. En 1–2 minutos queda en `https://TU-USUARIO.github.io/desmos-portafolio/`.
 
-Después de publicar, en `index.html` cambia `og:image` por la URL completa
+Si el sitio cambia de dirección, en `index.html` actualiza `og:url` y `og:image` con la URL completa
 (`https://TU-USUARIO.github.io/desmos-portafolio/assets/img/og.jpg`) para que se vea la vista previa al compartir el link.
 
 ## Estructura
