@@ -1422,6 +1422,7 @@ a.contact-card:hover { border-color: var(--violet-2); background: rgba(139, 92, 
   animation: popIn 0.45s var(--ease);
 }
 .lightbox__stage {
+  position: relative;
   display: grid;
   place-items: center;
   border-radius: 18px;
@@ -1436,6 +1437,67 @@ a.contact-card:hover { border-color: var(--violet-2); background: rgba(139, 92, 
   background: #000;
 }
 .lightbox__stage iframe { display: block; border: 0; }
+/* ---- protección: marca de agua y bloqueo ---- */
+.wm {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px 5px 5px;
+  border-radius: 999px;
+  background: rgba(6, 5, 26, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.8);
+  pointer-events: none;
+  user-select: none;
+}
+.wm img { width: 22px; height: 22px; border-radius: 50%; }
+.wm-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  transform: translate(-50%, -50%) rotate(-24deg);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(28px, 7vw, 72px);
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.11);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+.lb-shield {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 4;
+  width: 76px;
+  height: 64px;
+  cursor: default;
+}
+.work-card img,
+.work-card video,
+.phone img,
+.phone video,
+.lightbox__stage video,
+.hero__emblem img,
+.about__frame img {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+}
+
 .lb-frame--v { height: min(calc(100svh - var(--lb-space)), 820px, calc(92vw * 16 / 9)); aspect-ratio: 9 / 16; }
 .lb-frame--h { width: min(92vw, 1100px, calc((100svh - var(--lb-space)) * 16 / 9)); aspect-ratio: 16 / 9; }
 

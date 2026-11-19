@@ -89,6 +89,18 @@ window.PORTAFOLIO = {
   ],
 
   /* -------------------------------------------------------------------
+     PROTECCIÓN DE LOS VIDEOS
+     Pone difícil descargarlos desde la página (no lo impide al 100%:
+     siempre se puede grabar la pantalla). Lo que más protege es exportar
+     los videos del portafolio con marca de agua. Más info en README.md.
+     ------------------------------------------------------------------- */
+  proteccion: {
+    bloquearDescarga: true, // quita el botón de descarga, el clic derecho y la ventana flotante
+    marcaDeAgua: "DESMOS",  // texto que aparece sobre el reproductor ("" para quitarla)
+    marcaCentral: true      // además, una marca suave en el centro del video
+  },
+
+  /* -------------------------------------------------------------------
      PRECIOS  ·  ⚠️ Valores de ejemplo: confírmalos antes de publicar.
      Pon mostrar: false para ocultar toda la sección.
      ------------------------------------------------------------------- */

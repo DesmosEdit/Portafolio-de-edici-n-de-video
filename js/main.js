@@ -72,6 +72,28 @@
   const waReady = !!waNumber && !waPending;
   const email = String(PERFIL.email || '').trim();
   const nombre = PERFIL.nombre || 'Desmos';
+
+  /* ---------- Protección de videos ---------- */
+  const PROT = Object.assign({ bloquearDescarga: true, marcaDeAgua: nombre.toUpperCase(), marcaCentral: true }, CFG.proteccion || {});
+
+  // quita descarga, ventana flotante y envío a otros dispositivos del reproductor nativo
+  function protectVideo(v) {
+    if (!PROT.bloquearDescarga) return v;
+    v.setAttribute('controlsList', 'nodownload noplaybackrate noremoteplayback');
+    v.setAttribute('disablePictureInPicture', '');
+    v.setAttribute('disableRemotePlayback', '');
+    v.setAttribute('draggable', 'false');
+    v.disablePictureInPicture = true;
+    return v;
+  }
+
+  // marca de agua sobre el reproductor (no captura clics)
+  function watermarkHTML() {
+    if (!PROT.marcaDeAgua) return '';
+    const mark = esc(PROT.marcaDeAgua);
+    return `<span class="wm" aria-hidden="true"><img src="assets/img/favicon.png" alt="">${mark}</span>` +
+      (PROT.marcaCentral ? `<span class="wm-center" aria-hidden="true">${mark}</span>` : '');
+  }
   const waLink = (msg) => `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
 
   function contactHref(msg) {
@@ -189,6 +211,7 @@
         preview.loop = true;
         preview.playsInline = true;
         preview.src = it.media.src;
+        protectVideo(preview);
         card.insertBefore(preview, $('.work-card__shade', card));
         preview.play().then(() => {
           preview && preview.classList.add('is-playing');
@@ -242,7 +265,7 @@
           <span class="phone__screen">
             ${first.poster ? `<span class="work-card__bg" style="${esc('background-image:' + cssUrl(first.poster))}"></span>` : ''}
             ${first.media.type === 'local'
-              ? `<video class="phone__video" src="${esc(first.media.src)}" muted loop playsinline preload="none"${first.poster ? ` poster="${esc(first.poster)}"` : ''}></video>`
+              ? `<video class="phone__video" src="${esc(first.media.src)}" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback draggable="false"${first.poster ? ` poster="${esc(first.poster)}"` : ''}></video>`
               : `<img class="phone__img" src="${esc(first.poster)}" alt="" loading="lazy">`}
             <span class="phone__ui"><span>${esc(nombre)}</span><b>${ICON.play}</b></span>
           </span>
@@ -441,17 +464,23 @@
       if (it.poster) v.poster = it.poster;
       fitVideo(v, it.formato === '16:9' ? 16 / 9 : 9 / 16);
       v.addEventListener('loadedmetadata', () => { if (v.videoWidth) fitVideo(v, v.videoWidth / v.videoHeight); }, { once: true });
+      protectVideo(v);
       lbStage.append(v);
       v.play().catch(() => {});
     } else {
       const f = document.createElement('iframe');
       f.src = it.media.embed;
       f.title = it.titulo;
-      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      f.allow = PROT.bloquearDescarga ? 'autoplay; encrypted-media; fullscreen' : 'autoplay; encrypted-media; picture-in-picture; fullscreen';
       f.allowFullscreen = true;
       f.className = it.formato === '16:9' ? 'lb-frame--h' : 'lb-frame--v';
       lbStage.append(f);
+      // tapa el botón "abrir en Drive" (esquina superior derecha del reproductor de Drive)
+      if (it.media.type === 'drive' && PROT.bloquearDescarga) {
+        lbStage.insertAdjacentHTML('beforeend', '<span class="lb-shield" aria-hidden="true"></span>');
+      }
     }
+    lbStage.insertAdjacentHTML('beforeend', watermarkHTML());
     $('#lb-title').textContent = it.titulo;
     $('#lb-meta').textContent = [it.cliente, it.categoria].filter(Boolean).join(' · ');
     $('#lb-count').textContent = lbList.length > 1 ? `${pad(lbIndex + 1)} / ${pad(lbList.length)}` : '';
@@ -636,6 +665,14 @@
   renderCases();
   renderPrices();
   renderContact();
+
+  // sin clic derecho ni arrastre sobre videos y miniaturas (evita "Guardar video como…")
+  if (PROT.bloquearDescarga) {
+    const MEDIA = 'video, .work-card, .phone, .lightbox__stage, .hero__media, .hero__emblem, .about__frame, .intro';
+    document.addEventListener('contextmenu', (e) => { if (e.target.closest(MEDIA)) e.preventDefault(); });
+    document.addEventListener('dragstart', (e) => { if (e.target.closest(MEDIA)) e.preventDefault(); });
+    $$('video').forEach(protectVideo);
+  }
   numberSections();
   setupHeader();
   setupHero();
