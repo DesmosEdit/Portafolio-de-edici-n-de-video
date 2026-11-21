@@ -44,56 +44,56 @@ window.PORTAFOLIO = {
       cliente: "Cliente / Marca",
       categoria: "Reels",
       formato: "9:16",
-      video: "https://drive.google.com/file/d/1dsfIyEfGt5fbqJGTKM39EEvQcyg0abIo/view?usp=drive_link"
+      video: "https://drive.google.com/file/d/1pmfnhKb67NKD8Mo2UrrKPJ5z0z8mkiLg/view?usp=drive_link"
     },
     {
       titulo: "Proyecto 02",
       cliente: "Cliente / Marca",
       categoria: "TikTok",
       formato: "9:16",
-      video: "https://drive.google.com/file/d/1dsfIyEfGt5fbqJGTKM39EEvQcyg0abIo/view?usp=drive_link"
+      video: "https://drive.google.com/file/d/1pmfnhKb67NKD8Mo2UrrKPJ5z0z8mkiLg/view?usp=drive_link"
     },
     {
       titulo: "Proyecto 03",
       cliente: "Cliente / Marca",
       categoria: "Anuncio",
       formato: "9:16",
-      video: "https://drive.google.com/file/d/1dsfIyEfGt5fbqJGTKM39EEvQcyg0abIo/view?usp=drive_link"
+      video: "https://drive.google.com/file/d/1pmfnhKb67NKD8Mo2UrrKPJ5z0z8mkiLg/view?usp=drive_link"
     },
     {
       titulo: "Proyecto 04",
       cliente: "Cliente / Marca",
       categoria: "YouTube",
       formato: "16:9",
-      video: "https://drive.google.com/file/d/1dsfIyEfGt5fbqJGTKM39EEvQcyg0abIo/view?usp=drive_link"
+      video: "https://drive.google.com/file/d/1pmfnhKb67NKD8Mo2UrrKPJ5z0z8mkiLg/view?usp=drive_link"
     },
     {
       titulo: "Proyecto 05",
       cliente: "Cliente / Marca",
       categoria: "Reels",
       formato: "9:16",
-      video: "https://drive.google.com/file/d/1dsfIyEfGt5fbqJGTKM39EEvQcyg0abIo/view?usp=drive_link"
+      video: "https://drive.google.com/file/d/1pmfnhKb67NKD8Mo2UrrKPJ5z0z8mkiLg/view?usp=drive_link"
     },
     {
       titulo: "Proyecto 06",
       cliente: "Cliente / Marca",
       categoria: "TikTok",
       formato: "9:16",
-      video: "https://drive.google.com/file/d/1dsfIyEfGt5fbqJGTKM39EEvQcyg0abIo/view?usp=drive_link"
+      video: "https://drive.google.com/file/d/1pmfnhKb67NKD8Mo2UrrKPJ5z0z8mkiLg/view?usp=drive_link"
     },
     {
       titulo: "Proyecto 07",
       cliente: "Cliente / Marca",
       categoria: "Anuncio",
       formato: "9:16",
-      video: "https://drive.google.com/file/d/1dsfIyEfGt5fbqJGTKM39EEvQcyg0abIo/view?usp=drive_link"
+      video: "https://drive.google.com/file/d/1pmfnhKb67NKD8Mo2UrrKPJ5z0z8mkiLg/view?usp=drive_link"
     },
     {
       titulo: "Proyecto 08",
       cliente: "Cliente / Marca",
       categoria: "YouTube",
       formato: "16:9",
-      video: "https://drive.google.com/file/d/1dsfIyEfGt5fbqJGTKM39EEvQcyg0abIo/view?usp=drive_link"
+      video: "https://drive.google.com/file/d/1pmfnhKb67NKD8Mo2UrrKPJ5z0z8mkiLg/view?usp=drive_link"
     }
   ],
   /* -------------------------------------------------------------------
