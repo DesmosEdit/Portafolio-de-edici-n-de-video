@@ -109,7 +109,7 @@ window.PORTAFOLIO = {
     moneda: "USD",
     simbolo: "$",
     porDuracion: [
-      { duracion: "30 s – 1 min", precio: 10 },
+      { duracion: "30 s – 1 min", precio: 20 },
       { duracion: "2 – 4 min", precio: 40 },
       { duracion: "5 – 7 min", precio: 75 },
       { duracion: "10 – 15 min", precio: 100 }
