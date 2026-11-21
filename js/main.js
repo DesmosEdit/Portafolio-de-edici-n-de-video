@@ -15,7 +15,7 @@
 
   const pad = (n) => String(n).padStart(2, '0');
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const slug = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const slug = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   const cssUrl = (s) => `url("${String(s).replace(/["\\\n]/g, encodeURIComponent)}")`;
   const fmtDur = (t) => (isFinite(t) && t > 0 ? `${Math.floor(t / 60)}:${pad(Math.round(t % 60))}` : '');
 
@@ -38,7 +38,7 @@
   };
   const NET_LABEL = { instagram: 'Instagram', tiktok: 'TikTok', youtube: 'YouTube', facebook: 'Facebook' };
 
-  /* ---------- Video source parsing ---------- */
+  /* ---------- Video source parsing (local / Drive / YouTube) ---------- */
   function parseVideo(url) {
     const u = String(url || '').trim();
     if (!u) return null;
@@ -68,7 +68,7 @@
   /* ---------- Contact helpers ---------- */
   const waDisplay = String(PERFIL.whatsapp || '').trim();
   const waNumber = waDisplay.replace(/\D/g, '');
-  const waPending = /x/i.test(waDisplay) || (waDisplay && waNumber.length < 8);
+  const waPending = /x/i.test(waDisplay) || (waDisplay && waNumber.length < 8); // número aún sin completar
   const waReady = !!waNumber && !waPending;
   const email = String(PERFIL.email || '').trim();
   const nombre = PERFIL.nombre || 'Desmos';
@@ -76,6 +76,7 @@
   /* ---------- Protección de videos ---------- */
   const PROT = Object.assign({ bloquearDescarga: true, marcaDeAgua: nombre.toUpperCase(), marcaCentral: true }, CFG.proteccion || {});
 
+  // quita descarga, ventana flotante y envío a otros dispositivos del reproductor nativo
   function protectVideo(v) {
     if (!PROT.bloquearDescarga) return v;
     v.setAttribute('controlsList', 'nodownload noplaybackrate noremoteplayback');
@@ -86,6 +87,7 @@
     return v;
   }
 
+  // marca de agua sobre el reproductor (no captura clics)
   function watermarkHTML() {
     if (!PROT.marcaDeAgua) return '';
     const mark = esc(PROT.marcaDeAgua);
@@ -101,7 +103,7 @@
   }
   const linkAttrs = (c) => `href="${esc(c.href)}"${c.external ? ' target="_blank" rel="noopener"' : ''}`;
 
-  /* ---------- Data: Trabajos ---------- */
+  /* ---------- Data ---------- */
   const proyectos = Array.isArray(CFG.proyectos) ? CFG.proyectos : [];
   const items = [];
   proyectos.forEach((p, pi) => {
@@ -124,28 +126,8 @@
     });
   });
 
-  /* ---------- Data: Proyectos destacados (8 videos) ---------- */
-  const galeriaProyectos = Array.isArray(CFG.galeriaProyectos) ? CFG.galeriaProyectos : [];
-  const proyectosItems = [];
-  galeriaProyectos.forEach((v) => {
-    const media = parseVideo(v.video);
-    if (!media) return;
-    const isYtWide = media.type === 'youtube' && !media.shorts;
-    proyectosItems.push({
-      titulo: v.titulo || 'Proyecto',
-      cliente: v.cliente || '',
-      categoria: v.categoria || 'Edición',
-      formato: v.formato || (isYtWide ? '16:9' : '9:16'),
-      duracion: v.duracion || '',
-      encuadre: v.encuadre || '',
-      ajuste: v.ajuste === 'completo' ? 'contain' : 'cover',
-      poster: v.poster || media.thumb || '',
-      media
-    });
-  });
-
   /* =====================================================================
-     RENDER · Galería general
+     RENDER · Galería
      ===================================================================== */
   function mediaMarkup(it, imgClass) {
     const bg = it.poster ? `<span class="work-card__bg" style="${esc('background-image:' + cssUrl(it.poster))}"></span>` : '';
@@ -175,34 +157,6 @@
       </button>`;
   }
 
-  /* =====================================================================
-     RENDER · Proyectos (Cuadrícula 4 y 4)
-     ===================================================================== */
-  function renderProyectosGrid() {
-    const pGrid = $('#proyectos-grid');
-    if (!pGrid) return;
-    if (!proyectosItems.length) {
-      const sec = $('#proyectos');
-      if (sec) sec.hidden = true;
-      return;
-    }
-
-    pGrid.innerHTML = proyectosItems.map(cardHTML).join('');
-
-    $$('.work-card', pGrid).forEach((card) => {
-      const it = proyectosItems[+card.dataset.index];
-      const img = $('img.work-card__media', card);
-      if (img) img.addEventListener('error', () => card.classList.add('is-broken'), { once: true });
-      card.addEventListener('click', () => {
-        openLightbox(proyectosItems, +card.dataset.index, card);
-      });
-      if (it.media.type === 'local') setupLocalCard(card, it);
-    });
-  }
-
-  /* =====================================================================
-     RENDER · Trabajos
-     ===================================================================== */
   const grid = $('#work-grid');
   function renderGrid() {
     if (!grid) return;
@@ -226,6 +180,7 @@
     renderFilters();
   }
 
+  // duración automática + vista previa al pasar el mouse (solo videos locales)
   const durObserver = 'IntersectionObserver' in window
     ? new IntersectionObserver((entries) => {
         entries.forEach((e) => {
@@ -274,7 +229,6 @@
   function renderFilters() {
     const wrap = $('#filters');
     if (!wrap) return;
-
     const cats = [];
     items.forEach((it) => { if (!cats.some((c) => c.slug === slug(it.categoria))) cats.push({ slug: slug(it.categoria), name: it.categoria }); });
     if (cats.length < 2) return;
@@ -346,6 +300,7 @@
       btn.addEventListener('click', () => openLightbox(its, 0, btn));
     });
 
+    // los teléfonos se reproducen solos cuando están en pantalla
     const vids = $$('.phone__video', wrap);
     if (reduceMotion || !vids.length || !('IntersectionObserver' in window)) return;
     const io = new IntersectionObserver((entries) => {
@@ -391,7 +346,7 @@
         ${k.destacado ? '<span class="pack__badge">★ Más elegido</span>' : ''}
         <div>
           <h4 class="pack__name">${esc(k.nombre)}</h4>
-          ${k.detalle ? <p class="pack__detail">${esc(k.detalle)}</p> : ''}
+          ${k.detalle ? `<p class="pack__detail">${esc(k.detalle)}</p>` : ''}
         </div>
         <div>
           ${price(k.precio)} <span class="price__cur">${cur}</span>
@@ -416,6 +371,7 @@
     if (!actions || !socials) return;
     const hello = `Hola ${nombre}, vi tu portafolio y me gustaría cotizar un video.`;
     const mail = email ? `mailto:${email}?subject=${encodeURIComponent('Cotización de video')}&body=${encodeURIComponent(hello)}` : '';
+    // mientras el número esté pendiente, el enlace no lleva a ningún lado
     const waAttrs = waReady
       ? `href="${esc(waLink(hello))}" target="_blank" rel="noopener"`
       : 'href="#contacto" data-pending title="Número de WhatsApp pendiente"';
@@ -430,6 +386,7 @@
     }
     actions.innerHTML = btns.join('');
 
+    // tarjetas con los datos de contacto
     const nac = String(PERFIL.nacionalidad || '').trim();
     const info = [];
     if (waDisplay) {
@@ -484,6 +441,7 @@
     $('.lightbox__close', lb).focus();
   }
 
+  // ajusta el reproductor al tamaño de pantalla según la proporción del video
   function fitVideo(el, ar) {
     if (ar >= 1) {
       el.style.width = `min(92vw, 1100px, calc((100svh - var(--lb-space)) * ${ar}))`;
@@ -517,6 +475,7 @@
       f.allowFullscreen = true;
       f.className = it.formato === '16:9' ? 'lb-frame--h' : 'lb-frame--v';
       lbStage.append(f);
+      // tapa el botón "abrir en Drive" (esquina superior derecha del reproductor de Drive)
       if (it.media.type === 'drive' && PROT.bloquearDescarga) {
         lbStage.insertAdjacentHTML('beforeend', '<span class="lb-shield" aria-hidden="true"></span>');
       }
@@ -571,9 +530,9 @@
     if (!intro) return ready();
 
     let seen = false;
-    try { seen = sessionStorage.getItem('desmos-intro') === '1'; } catch (_) {}
+    try { seen = sessionStorage.getItem('desmos-intro') === '1'; } catch (_) { /* sin storage */ }
     if (seen || reduceMotion || location.hash.length > 1) { intro.remove(); ready(); return; }
-    try { sessionStorage.setItem('desmos-intro', '1'); } catch (_) {}
+    try { sessionStorage.setItem('desmos-intro', '1'); } catch (_) { /* sin storage */ }
 
     const video = $('video', intro);
     document.body.classList.add('is-locked');
@@ -604,7 +563,7 @@
   }
 
   /* =====================================================================
-     UI: Header, Nav, Scrollspy & Reveal
+     UI: header, menú, progreso, scrollspy, timecode, reveal
      ===================================================================== */
   function setupHeader() {
     const header = $('#header');
@@ -621,6 +580,7 @@
     addEventListener('resize', update);
     update();
 
+    // menú móvil
     const toggle = $('.nav__toggle');
     const links = $('#nav-links');
     const setOpen = (open) => {
@@ -633,6 +593,7 @@
     document.addEventListener('click', (e) => { if (!e.target.closest('.nav')) setOpen(false); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
 
+    // scrollspy
     if (!('IntersectionObserver' in window)) return;
     const navLinks = $$('.nav__links a[href^="#"]:not(.btn)');
     const byId = new Map(navLinks.map((a) => [a.getAttribute('href').slice(1), a]));
@@ -700,19 +661,18 @@
   const year = $('#year');
   if (year) year.textContent = String(new Date().getFullYear());
 
-  renderProyectosGrid();
   renderGrid();
   renderCases();
   renderPrices();
   renderContact();
 
+  // sin clic derecho ni arrastre sobre videos y miniaturas (evita "Guardar video como…")
   if (PROT.bloquearDescarga) {
     const MEDIA = 'video, .work-card, .phone, .lightbox__stage, .hero__media, .hero__emblem, .about__frame, .intro';
     document.addEventListener('contextmenu', (e) => { if (e.target.closest(MEDIA)) e.preventDefault(); });
     document.addEventListener('dragstart', (e) => { if (e.target.closest(MEDIA)) e.preventDefault(); });
     $$('video').forEach(protectVideo);
   }
-
   numberSections();
   setupHeader();
   setupHero();
