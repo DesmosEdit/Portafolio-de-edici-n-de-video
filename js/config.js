@@ -61,9 +61,9 @@ window.PORTAFOLIO = {
         youtube: ""  // link a los reels/shorts en YouTube
       },
       videos: [
-        { titulo: "Reel promocional", video: "assets/video/demo/demo-intro.mp4", poster: "assets/posters/demo-intro-b.jpg" },
-        { titulo: "Reel de destino", video: "assets/video/demo/demo-pantera.mp4", poster: "assets/posters/demo-pantera-a.jpg", encuadre: "78% center" },
-        { titulo: "Reel de atención al cliente", video: "assets/video/demo/demo-intro.mp4", poster: "assets/posters/demo-intro-a.jpg" }
+        { titulo: "Reel promocional", video: "https://drive.google.com/drive/u/2/folders/1S6YYnx1C7IHtB7PIc8oW2qOq7FflieKP" },  // assets/video/demo/demo-intro.mp4", poster: "assets/posters/demo-intro-b.jpg
+        { titulo: "Reel de marketing", video: "https://drive.google.com/drive/u/2/folders/1S6YYnx1C7IHtB7PIc8oW2qOq7FflieKP", encuadre: "78% center" }, // assets/video/demo/demo-pantera.mp4", poster: "assets/posters/demo-pantera-a.jp
+        { titulo: "Reel de atención al cliente", video: "https://drive.google.com/drive/u/2/folders/1S6YYnx1C7IHtB7PIc8oW2qOq7FflieKP" } // assets/video/demo/demo-intro.mp4", poster: "assets/posters/demo-intro-a.jpg
       ]
     },
     {
