@@ -61,9 +61,9 @@ window.PORTAFOLIO = {
         youtube: ""  // link a los reels/shorts en YouTube
       },
       videos: [
-        { titulo: "Reel promocional", video: "https://drive.google.com/file/d/15r0MXEd6PRzTu_tis4dkJi--yCA8FFVF/view?usp=sharing", encuadre: "center"},  // assets/video/demo/demo-intro.mp4", poster: "assets/posters/demo-intro-b.jpg
-        { titulo: "Reel de marketing", video: "https://drive.google.com/file/d/1pmfnhKb67NKD8Mo2UrrKPJ5z0z8mkiLg/view?usp=drive_link", encuadre: "center" }, // assets/video/demo/demo-pantera.mp4", poster: "assets/posters/demo-pantera-a.jp
-        { titulo: "Reel de atención al cliente", video: "https://drive.google.com/file/d/1dsfIyEfGt5fbqJGTKM39EEvQcyg0abIo/view?usp=drive_link", encuadre: "center" } // assets/video/demo/demo-intro.mp4", poster: "assets/posters/demo-intro-a.jpg
+        { titulo: "Reel promocional", video: "https://drive.google.com/file/d/1lEChKCobo_hNs7IItBDpXoP-OZakmFUO/view?usp=drive_link" },  // assets/video/demo/demo-intro.mp4", poster: "assets/posters/demo-intro-b.jpg
+        { titulo: "Reel de marketing", video: "https://drive.google.com/file/d/1o5zjafcEpZhvw3-PjpBZmwy0j_MqKT7Y/view?usp=drive_link", encuadre: "78% center" }, // assets/video/demo/demo-pantera.mp4", poster: "assets/posters/demo-pantera-a.jp
+        { titulo: "Reel de atención al cliente", video: "https://drive.google.com/file/d/17tygVKcLL6figjbebs9ts9R3pL8oFfik/view?usp=drive_link" } // assets/video/demo/demo-intro.mp4", poster: "assets/posters/demo-intro-a.jpg
       ]
     },
     {
@@ -83,7 +83,7 @@ window.PORTAFOLIO = {
       resultado: "Resultado satisfactorio para el cliente, listo para publicar.",
       links: {},
       videos: [
-        { titulo: "Reel de producto", video: "assets/video/demo/demo-pantera.mp4", poster: "assets/posters/demo-pantera-b.jpg", encuadre: "78% center" }
+        { titulo: "Reel de producto", video: "https://drive.google.com/file/d/1dsfIyEfGt5fbqJGTKM39EEvQcyg0abIo/view?usp=drive_linkg", encuadre: "78% center" }
       ]
     }
   ],
