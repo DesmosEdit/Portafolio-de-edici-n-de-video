@@ -10,13 +10,38 @@ Doble clic en `index.html`. Listo.
 
 ## Editar el contenido
 
-Todo lo que cambia está en **`js/config.js`**:
+Hay dos formas. Las dos tocan el mismo archivo, `js/config.js`.
+Arriba de ese archivo está la guía, y cada bloque tiene un comentario que dice qué cambiar.
 
-| Qué | Dónde |
+**Formulario (más fácil si no programas)**
+
+1. Abre `crear/index.html` (doble clic). En el sitio publicado la dirección termina en `/crear/`.
+2. Cambia los campos. Cada uno explica para qué sirve.
+3. Pulsa **Descargar config.js**.
+4. Mete ese archivo en la carpeta `js`, reemplazando el anterior.
+5. Abre `index.html` y pulsa F5.
+
+**A mano**
+
+Abre `js/config.js` y cambia el texto que está entre comillas `"así"`.
+`mostrar: true` enseña esa parte. `mostrar: false` la esconde.
+Para sumar un video, un precio o una sección, copia un bloque que ya exista
+(desde `{` hasta `}`, con la coma) y pégalo debajo.
+
+| Qué | Dónde, en `js/config.js` |
 | --- | --- |
-| Email, WhatsApp, nacionalidad, redes, ubicación | `perfil` (⚠️ el WhatsApp tiene X: pon el número real) |
-| Proyectos y sus videos | `proyectos` |
-| Precios y paquetes | `precios` (pon `mostrar: false` para ocultarlos) |
+| Nombre, email, WhatsApp, redes | `perfil` |
+| Portada, cinta, menú, orden | `portada`, `cinta`, `orden` |
+| Videos y proyectos | `proyectos` (y qué galería los muestra, en `galerias`) |
+| Servicios, proceso, precios, sobre mí, contacto | su bloque con ese nombre |
+| Una sección nueva | `seccionesExtra` (`tipo`: `"texto"`, `"videos"`, `"tarjetas"` o `"pasos"`) |
+| Precios ocultos | `precios` → `mostrar: false` |
+
+`columnas: "auto"` en una galería acomoda las tarjetas aunque agregues muchos videos:
+en el celular se apilan y en la computadora arman filas. Un video `"horizontal"` sale más ancho que uno `"vertical"`.
+
+Si la página se queda en blanco, se borró una coma, una comilla o una llave.
+Deshaz el cambio (Ctrl+Z) o vuelve a descargar el archivo desde `crear/index.html`.
 
 ### Poner los videos de Google Drive
 

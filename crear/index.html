@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Editar el portafolio</title>
+  <meta name="theme-color" content="#06051a">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/editor.css">
+  <script>
+    window.addEventListener('error', function (ev) {
+      var file = String(ev.filename || '');
+      if (file.indexOf('config.js') === -1) return;
+      document.addEventListener('DOMContentLoaded', function () {
+        var box = document.getElementById('app');
+        if (!box) return;
+        box.innerHTML = '<div class="config-error"><h1>No pude leer js/config.js</h1><p>Falta una coma, una comilla o una llave. Deshaz el último cambio en ese archivo (Ctrl+Z), guarda y vuelve a abrir esta página.</p><pre></pre></div>';
+        box.querySelector('pre').textContent = ev.message || '';
+      });
+    });
+  </script>
+</head>
+<body>
+  <header class="ed-top">
+    <div>
+      <h1>Editar el portafolio</h1>
+      <p>Los cambios se guardan cuando descargas el archivo y lo pones en la carpeta js.</p>
+    </div>
+    <div class="ed-actions">
+      <a class="btn btn--ghost" href="../index.html">Ver el sitio</a>
+      <button class="btn btn--ghost" id="btn-preview" type="button">Ver prueba</button>
+      <button class="btn btn--primary" id="btn-download" type="button">Descargar config.js</button>
+    </div>
+  </header>
+
+  <main class="ed-wrap">
+    <section class="ed-help">
+      <p class="label"><span>01</span>Cómo se guarda</p>
+      <ol>
+        <li>Cambia lo que quieras en los apartados de abajo. Cada campo dice para qué sirve.</li>
+        <li>Pulsa <strong>Ver prueba</strong> para mirar el resultado. En tu computadora, si abriste el archivo con doble clic, la prueba a veces no comparte los datos: en ese caso usa el paso 3.</li>
+        <li>Pulsa <strong>Descargar config.js</strong>. El navegador baja un archivo con ese nombre.</li>
+        <li>Muévelo a la carpeta <strong>js</strong> y reemplaza el que ya está ahí. Tiene que quedar en <strong>js/config.js</strong>.</li>
+        <li>Abre <strong>index.html</strong> y pulsa F5. Eso ya es el portafolio de verdad.</li>
+      </ol>
+    </section>
+    <div id="app"></div>
+  </main>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/editor.js"></script>
+</body>
+</html>

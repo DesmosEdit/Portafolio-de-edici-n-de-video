@@ -1,0 +1,143 @@
+/* Formulario para editar el portafolio sin tocar código. */
+
+.ed-top {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 18px;
+  padding: 14px 22px;
+  background: rgba(6, 5, 26, 0.92);
+  border-bottom: 1px solid var(--line-2);
+  backdrop-filter: blur(16px);
+}
+.ed-top h1 {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2vw, 26px);
+  font-weight: 600;
+}
+.ed-top p { color: var(--dim); font-size: 13px; }
+.ed-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.ed-wrap {
+  width: min(980px, calc(100% - 28px));
+  margin: 28px auto 80px;
+  display: grid;
+  gap: 18px;
+}
+
+.ed-help,
+.ed-card {
+  padding: 22px;
+  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--line-2);
+}
+.ed-help ol { display: grid; gap: 8px; margin-top: 12px; padding-left: 18px; }
+.ed-help li { color: var(--muted); }
+.ed-help strong { color: var(--text); }
+
+.ed-card > summary,
+.ed-block > summary {
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 18px;
+  list-style: none;
+}
+.ed-card > summary::-webkit-details-marker,
+.ed-block > summary::-webkit-details-marker { display: none; }
+.ed-card > summary::before,
+.ed-block > summary::before { content: "▸ "; color: var(--cyan); }
+.ed-card[open] > summary::before,
+.ed-block[open] > summary::before { content: "▾ "; }
+.ed-card > summary { margin-bottom: 6px; }
+.ed-card[open] > summary { margin-bottom: 16px; }
+
+.ed-note { color: var(--muted); font-size: 14.5px; margin-bottom: 16px; }
+.ed-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.ed-grid .ed-wide { grid-column: 1 / -1; }
+
+.ed-field { display: grid; gap: 6px; min-width: 0; }
+.ed-field > span,
+.ed-check > span { font-weight: 700; font-size: 14px; }
+.ed-field small,
+.ed-check small,
+.ed-mini { color: var(--dim); font-size: 12.5px; line-height: 1.45; }
+.ed-field input,
+.ed-field textarea,
+.ed-field select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--line-2);
+  background: rgba(0, 0, 0, 0.28);
+  color: var(--text);
+  font: inherit;
+}
+.ed-field textarea { min-height: 90px; resize: vertical; }
+.ed-field input:focus,
+.ed-field textarea:focus,
+.ed-field select:focus { outline: 2px solid var(--violet); border-color: transparent; }
+
+.ed-check {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  padding: 10px 0;
+}
+.ed-check input { width: 18px; height: 18px; accent-color: var(--violet); }
+.ed-check small { flex-basis: 100%; }
+
+.ed-block {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid var(--line-2);
+}
+.ed-block > summary { display: flex; justify-content: space-between; gap: 12px; }
+.ed-kicker { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); }
+
+.ed-tools { display: flex; flex-wrap: wrap; gap: 8px; }
+.ed-tools button,
+.ed-add {
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line-2);
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 13px;
+}
+.ed-tools button:hover,
+.ed-add:hover { border-color: var(--violet-2); }
+.ed-danger { color: #ffb4c4; }
+.ed-add { margin-top: 12px; color: var(--cyan); }
+
+.ed-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px 14px;
+  align-items: center;
+  padding: 12px 0;
+  border-top: 1px solid var(--line-2);
+}
+.ed-row .ed-tools { grid-column: 1; }
+.ed-id { font-family: var(--font-mono); font-size: 12px; color: var(--dim); }
+
+.ed-inline { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; }
+.ed-inline .ed-field { flex: 1 1 220px; }
+
+@media (max-width: 720px) {
+  .ed-grid { grid-template-columns: 1fr; }
+  .ed-top { align-items: stretch; }
+  .ed-actions .btn { flex: 1; }
+}
