@@ -176,20 +176,20 @@ window.PORTAFOLIO = {
       fondo: "normal",
       videos: [
         {
-          titulo: "Reel promocional",
+          titulo: "Reel Promocional",
           categoria: "Reels",
           video: "https://drive.google.com/file/d/12Ls0Z6BI5OByFsp-hRTziNOBiqW2pNMz/view?usp=drive_link",
           formato: "vertical",
         },
         {
-          titulo: "Reel de marketing",
+          titulo: "Reel de Marketing",
           categoria: "Reels",
           video: "https://drive.google.com/file/d/15r0MXEd6PRzTu_tis4dkJi--yCA8FFVF/view?usp=drive_link",
           formato: "vertical",
           encuadre: "78% center",
         },
         {
-          titulo: "Reel de atención al cliente",
+          titulo: "Reel de Negocios",
           categoria: "Reels",
           video: "https://drive.google.com/file/d/1pmfnhKb67NKD8Mo2UrrKPJ5z0z8mkiLg/view?usp=drive_link",
           formato: "vertical",
