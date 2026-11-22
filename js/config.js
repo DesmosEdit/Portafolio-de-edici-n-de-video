@@ -178,20 +178,20 @@ window.PORTAFOLIO = {
         {
           titulo: "Reel promocional",
           categoria: "Reels",
-          video: "https://drive.google.com/file/d/1lEChKCobo_hNs7IItBDpXoP-OZakmFUO/view?usp=drive_link",
+          video: "https://drive.google.com/file/d/12Ls0Z6BI5OByFsp-hRTziNOBiqW2pNMz/view?usp=drive_link",
           formato: "vertical",
         },
         {
           titulo: "Reel de marketing",
           categoria: "Reels",
-          video: "https://drive.google.com/file/d/1o5zjafcEpZhvw3-PjpBZmwy0j_MqKT7Y/view?usp=drive_link",
+          video: "https://drive.google.com/file/d/15r0MXEd6PRzTu_tis4dkJi--yCA8FFVF/view?usp=drive_link",
           formato: "vertical",
           encuadre: "78% center",
         },
         {
           titulo: "Reel de atención al cliente",
           categoria: "Reels",
-          video: "https://drive.google.com/file/d/17tygVKcLL6figjbebs9ts9R3pL8oFfik/view?usp=drive_link",
+          video: "https://drive.google.com/file/d/1pmfnhKb67NKD8Mo2UrrKPJ5z0z8mkiLg/view?usp=drive_link",
           formato: "vertical",
         },
       ],
