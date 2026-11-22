@@ -224,6 +224,27 @@ window.PORTAFOLIO = {
           video: "https://drive.google.com/file/d/1ueX_YHdXnk8c-c3G9EY5Sezl7CWuIKMH/view?usp=drive_link",
           formato: "vertical",
         },
+         {
+          titulo: "Curiosidades y misterios",
+          categoria: "Reels",
+          video: "https://drive.google.com/file/d/1pFfOk1ndyklFTzOEE6BjADrz6bdXwkun/view?usp=drive_link",
+          formato: "vertical",
+        },
+         {
+          titulo: "Infantiles",
+          categoria: "Reels",
+          video: "https://drive.google.com/file/d/1aItHHNp3t9Ntoq_Biewoc_UZemq9tBd_/view?usp=drive_link",
+          formato: "vertical",
+        },
+          {
+          titulo: "Infantiles",
+          categoria: "Reels",
+          video: "https://drive.google.com/file/d/13dVALSzUAlCQO2eRIF0_-DodA3fPKOmk/view?usp=drive_link",
+          formato: "vertical",
+        },
+         {
+         texto: "Se actualizará la galería dentro de poco con nuevos proyectos"
+       },   
       ],
     },
     {
