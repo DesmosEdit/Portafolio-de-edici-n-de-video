@@ -7,23 +7,23 @@
    HAY DOS FORMAS (usa la que te resulte más fácil):
 
    A) Formulario
-      1. Abre crear/index.html con doble clic.
+1. Abre crear/index.html con doble clic.
          Si el sitio ya está en internet, entra a la dirección y agrega /crear/
-      2. Cambia lo que quieras.
-      3. Pulsa "Descargar config.js".
-      4. Mete ese archivo dentro de la carpeta js, reemplazando este.
-      5. Abre index.html y pulsa F5 para recargar.
+2. Cambia lo que quieras.
+3. Pulsa "Descargar config.js".
+4. Mete ese archivo dentro de la carpeta js, reemplazando este.
+5. Abre index.html y pulsa F5 para recargar.
 
    B) Editar aquí mismo
-      1. Cambia el texto que está entre comillas. Ejemplo: "Desmos"
-      2. mostrar: true   = esa parte SÍ se ve en la página
+1. Cambia el texto que está entre comillas. Ejemplo: "Desmos"
+2. mostrar: true   = esa parte SÍ se ve en la página
          mostrar: false  = esa parte NO se ve
          true y false se escriben SIN comillas.
-      3. Para sumar un video, un precio, un servicio o una sección,
+3. Para sumar un video, un precio, un servicio o una sección,
          copia un bloque que ya exista, desde { hasta } , y pégalo debajo.
          Deja la coma al final del bloque.
-      4. No borres comas , ni llaves { } ni corchetes [ ].
-      5. Guarda (Ctrl + S) y recarga index.html (F5).
+4. No borres comas , ni llaves { } ni corchetes [ ].
+5. Guarda (Ctrl + S) y recarga index.html (F5).
 
    SI LA PÁGINA SE QUEDA EN BLANCO O SE VE RARA
       Casi siempre se borró una coma, una comilla o una llave.
@@ -46,7 +46,6 @@
       La miniatura de Drive y de YouTube sale sola.
       formato: "vertical" (reels), "horizontal" (YouTube) o "cuadrado".
       También valen "9:16", "16:9", "1:1" y "4:5".
-      destacado: true  lo pone en la sección de Proyectos destacados.
 
    MÁS VIDEOS Y LA PÁGINA SE SIGUE VIENDO BIEN
       En cada galería, columnas: "auto" acomoda las tarjetas solas.
@@ -155,29 +154,64 @@ window.PORTAFOLIO = {
   ],
 
   /* =====================================================================
-     6) GALERÍAS DE VIDEOS
-     Son las secciones que enseñan las tarjetas de video.
-     Los videos en sí están en "proyectos", aquí solo decides cuáles entran,
-     el título y cuántas columnas usar.
-       cuales: "destacados"    solo los que tienen destacado: true
-               "todos"         todos los videos de los proyectos
-               "sin-destacar"  los que NO están marcados como destacados
-       columnas: "auto" se acomoda solo (recomendado). También puedes poner 2, 3 o 4.
-       filtros: true muestra botones para filtrar por categoría (si hay más de una).
+     6) GALERÍAS DE VIDEOS (INDEPENDIENTES DE "PROYECTOS")
+     Aquí pones directamente los videos que quieras que aparezcan en cada
+     galería, en el orden en que los escribas. No toman videos de
+     "proyectos" a menos que tú copies los enlaces aquí.
+
+     columnas: "auto" se acomoda solo (recomendado). También puedes poner 2, 3 o 4.
+     filtros: true muestra botones para filtrar por categoría (si hay más de una).
      ===================================================================== */
   galerias: [
     {
-      id: "proyectos", // no lo cambies: es el ancla del menú (#proyectos)
+      id: "proyectos", // se mantiene el id por si el menú o enlaces apuntan a #proyectos
       mostrar: true,
-      menu: "Proyectos", // texto del menú de arriba. Vacío "" = no sale en el menú
-      etiqueta: "Proyectos",
-      titulo: "Proyectos destacados",
-      texto: "Ejemplos de edición en proyectos realizados. Toca cualquier video para verlo completo.",
-      cuales: "destacados",
+      menu: "Destacados", // texto del menú de arriba. Vacío "" = no sale en el menú
+      etiqueta: "Galería",
+      titulo: "Videos destacados",
+      texto: "Selección de videos destacados. Toca cualquiera para verlo completo.",
       columnas: "auto",
       filtros: false,
       nota: "", // frase al final de la sección. Vacío = no se muestra
       fondo: "normal", // "normal" o "suave"
+      videos: [
+        {
+          titulo: "Reel promocional",
+          categoria: "Reels",
+          video: "https://drive.google.com/file/d/15r0MXEd6PRzTu_tis4dkJi--yCA8FFVF/view?usp=drive_link",
+          formato: "vertical",
+        },
+        {
+          titulo: "Reel de marketing",
+          categoria: "Reels",
+          video: "https://drive.google.com/file/d/1pmfnhKb67NKD8Mo2UrrKPJ5z0z8mkiLg/view?usp=drive_link",
+          formato: "vertical",
+          encuadre: "78% center",
+        },
+        {
+          titulo: "Reel de atención al cliente",
+          categoria: "Reels",
+          video: "https://drive.google.com/file/d/1qpYw1gGwTZzofxjV_z_83sxHDoqKGBSy/view?usp=drive_link",
+          formato: "vertical",
+        },
+          {
+          titulo: "Reel de atención al cliente",
+          categoria: "Reels",
+          video: "https://drive.google.com/file/d/12Ls0Z6BI5OByFsp-hRTziNOBiqW2pNMz/view?usp=drive_link",
+          formato: "vertical",
+        },
+        /* Copia desde { hasta }, incluida la coma, para sumar más videos:
+        {
+          titulo: "Nuevo video destacado",
+          categoria: "YouTube",
+          video: "https://youtu.be/TU_ID_DE_VIDEO",
+          formato: "horizontal", // "vertical", "horizontal" o "cuadrado"
+          poster: "assets/posters/mi-foto.jpg", // opcional
+          ajuste: "completo", // opcional: muestra miniatura sin recortar
+          duracion: "0:30", // opcional
+        },
+        */
+      ],
     },
     {
       id: "trabajos",
@@ -185,29 +219,33 @@ window.PORTAFOLIO = {
       menu: "Trabajos",
       etiqueta: "Trabajos",
       titulo: "Más recientes",
-      texto: "Algunos proyectos en los que he trabajado recientemente. Toca cualquier video para verlo completo.",
-      cuales: "todos", // cámbialo a "sin-destacar" si no quieres repetir los destacados
+      texto: "Otros videos que he editado. Toca cualquiera para verlo completo.",
       columnas: "auto",
       filtros: true,
       nota: "¿Quieres ver más ejemplos de tu nicho? [Pídemelos](#contacto)",
       fondo: "normal",
+      videos: [
+        {
+          titulo: "Reel de producto",
+          categoria: "Reels",
+          video: "https://drive.google.com/file/d/1dsfIyEfGt5fbqJGTKM39EEvQcyg0abIo/view?usp=drive_link",
+          formato: "vertical",
+          encuadre: "78% center",
+        },
+      ],
     },
   ],
 
   /* =====================================================================
-     7) PROYECTOS Y SUS VIDEOS
-     Cada proyecto es un caso (cliente, qué hiciste, resultado) y, adentro,
-     uno o más videos. Esos videos alimentan las galerías de arriba.
-
-     CÓMO AGREGAR UN VIDEO
-     Copia desde { hasta }, incluida la coma, pégalo dentro de videos
-     y cambia el título y el link.
+     7) PROYECTOS Y SUS VIDEOS (APARTE DE LAS GALERÍAS)
+     Esta sección sirve para tus fichas de casos / clientes. No alimenta
+     automáticamente las galerías de arriba.
 
      CÓMO AGREGAR UN PROYECTO ENTERO
      Copia un proyecto completo (el bloque grande) y pégalo después,
      antes del ]. Cambia los textos y los links.
 
-     mostrar: false esconde ese proyecto de las galerías y de los casos.
+     mostrar: false esconde ese proyecto de la sección de casos.
      ===================================================================== */
   proyectos: [
     {
@@ -215,7 +253,7 @@ window.PORTAFOLIO = {
       titulo: "Reels para agencia de viajes",
       cliente: "Kruceros",
       clienteDetalle: "Agencia de viajes · España", // sale chiquito debajo del cliente
-      categoria: "Reels", // sirve para los filtros de Trabajos
+      categoria: "Reels",
       plataformas: ["TikTok", "YouTube"], // solo texto, para la ficha del caso
       descripcion: "Edición completa de una serie de reels para la agencia de viajes española Kruceros. El objetivo era mostrar los productos y la excelente atención al cliente de forma rápida, clara y atractiva.",
       tareas: [
@@ -235,28 +273,18 @@ window.PORTAFOLIO = {
           titulo: "Reel promocional",
           video: "https://drive.google.com/file/d/1lEChKCobo_hNs7IItBDpXoP-OZakmFUO/view?usp=drive_link",
           formato: "vertical",
-          destacado: true, // true = también sale en Proyectos destacados
         },
         {
           titulo: "Reel de marketing",
           video: "https://drive.google.com/file/d/1o5zjafcEpZhvw3-PjpBZmwy0j_MqKT7Y/view?usp=drive_link",
           formato: "vertical",
-          destacado: true,
-          encuadre: "78% center", // qué parte de la miniatura se ve. Ej. "center", "center top"
+          encuadre: "78% center",
         },
         {
           titulo: "Reel de atención al cliente",
           video: "https://drive.google.com/file/d/17tygVKcLL6figjbebs9ts9R3pL8oFfik/view?usp=drive_link",
           formato: "vertical",
-          destacado: true,
         },
-        /* Campos opcionales de un video (cópialos solo si los necesitas):
-           categoria: "Reels",          // si lo omites, usa la del proyecto
-           cliente: "Otro nombre",
-           poster: "assets/posters/mi-foto.jpg",  // miniatura propia
-           ajuste: "completo",          // muestra la miniatura entera, sin recortar
-           duracion: "0:30",            // si lo omites, en archivos locales se calcula sola
-        */
       ],
     },
     {
@@ -283,7 +311,6 @@ window.PORTAFOLIO = {
           titulo: "Reel de producto",
           video: "https://drive.google.com/file/d/1dsfIyEfGt5fbqJGTKM39EEvQcyg0abIo/view?usp=drive_link",
           formato: "vertical",
-          destacado: false, // false = no sale en Proyectos destacados, sí en Trabajos
           encuadre: "78% center",
         },
       ],
@@ -485,58 +512,6 @@ window.PORTAFOLIO = {
            "videos"    una galería aparte (no usa los proyectos)
            "tarjetas"  fichas con icono, título y texto
            "pasos"     pasos numerados
-
-     Ejemplo de una sección de videos (cópiala dentro de este corchete
-     si la quieres, y pon una coma después del bloque anterior):
-
-       {
-         id: "anuncios",
-         tipo: "videos",
-         mostrar: true,
-         menu: "Anuncios",
-         etiqueta: "Anuncios",
-         titulo: "Anuncios que he editado",
-         texto: "Piezas cortas para redes.",
-         fondo: "suave",
-         columnas: "auto",
-         filtros: false,
-         nota: "",
-         videos: [
-           { titulo: "Anuncio 1", video: "https://drive.google.com/file/d/PEGA_EL_ID/view", formato: "vertical", categoria: "Anuncios" },
-           { titulo: "Anuncio horizontal", video: "https://youtu.be/XXXXXXXXXXX", formato: "horizontal" },
-         ],
-       },
-
-     Ejemplo de fichas:
-       {
-         id: "clientes",
-         tipo: "tarjetas",
-         mostrar: true,
-         menu: "Clientes",
-         etiqueta: "Clientes",
-         titulo: "Con quién he trabajado",
-         texto: "",
-         fondo: "normal",
-         tarjetas: [
-           { icono: "estrella", titulo: "Agencia", texto: "Reels mensuales para sus campañas." },
-         ],
-       },
-
-     Ejemplo de pasos:
-       {
-         id: "entregas",
-         tipo: "pasos",
-         mostrar: true,
-         menu: "Entregas",
-         etiqueta: "Entregas",
-         titulo: "Tiempos de entrega",
-         texto: "",
-         fondo: "suave",
-         pasos: [
-           { tiempo: "Día 1", titulo: "Brief", texto: "Recibo el material y las referencias." },
-           { tiempo: "Día 3", titulo: "Entrega", texto: "Te mando el primer corte." },
-         ],
-       },
      ===================================================================== */
   seccionesExtra: [
     {
