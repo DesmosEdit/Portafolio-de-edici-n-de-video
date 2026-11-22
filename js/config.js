@@ -164,42 +164,39 @@ window.PORTAFOLIO = {
      ===================================================================== */
   galerias: [
     {
-      id: "proyectos", // se mantiene el id por si el menú o enlaces apuntan a #proyectos
+      id: "proyectos",
       mostrar: true,
-      menu: "Destacados", // texto del menú de arriba. Vacío "" = no sale en el menú
+      menu: "Destacados",
       etiqueta: "Galería",
       titulo: "Videos destacados",
       texto: "Selección de videos destacados. Toca cualquiera para verlo completo.",
       columnas: "auto",
       filtros: false,
-      nota: "", // frase al final de la sección. Vacío = no se muestra
-      fondo: "normal", // "normal" o "suave"
+      nota: "",
+      fondo: "normal",
       videos: [
         {
           titulo: "Reel promocional",
           categoria: "Reels",
-          video: "https://drive.google.com/file/d/15r0MXEd6PRzTu_tis4dkJi--yCA8FFVF/view?usp=drive_link",
+          video: "https://drive.google.com/file/d/1lEChKCobo_hNs7IItBDpXoP-OZakmFUO/view?usp=drive_link",
           formato: "vertical",
         },
         {
           titulo: "Reel de marketing",
           categoria: "Reels",
-          video: "https://drive.google.com/file/d/1pmfnhKb67NKD8Mo2UrrKPJ5z0z8mkiLg/view?usp=drive_link",
+          video: "https://drive.google.com/file/d/1o5zjafcEpZhvw3-PjpBZmwy0j_MqKT7Y/view?usp=drive_link",
           formato: "vertical",
           encuadre: "78% center",
         },
         {
           titulo: "Reel de atención al cliente",
           categoria: "Reels",
-          video: "https://drive.google.com/file/d/1qpYw1gGwTZzofxjV_z_83sxHDoqKGBSy/view?usp=drive_link",
+          video: "https://drive.google.com/file/d/17tygVKcLL6figjbebs9ts9R3pL8oFfik/view?usp=drive_link",
           formato: "vertical",
         },
-          {
-          titulo: "Reel de atención al cliente",
-          categoria: "Reels",
-          video: "https://drive.google.com/file/d/12Ls0Z6BI5OByFsp-hRTziNOBiqW2pNMz/view?usp=drive_link",
-          formato: "vertical",
-        },
+      ],
+    },
+    {
         /* Copia desde { hasta }, incluida la coma, para sumar más videos:
         {
           titulo: "Nuevo video destacado",
@@ -211,20 +208,36 @@ window.PORTAFOLIO = {
           duracion: "0:30", // opcional
         },
         */
-      ],
-    },
-    {
-      id: "trabajos",
+     id: "trabajos",
       mostrar: true,
       menu: "Trabajos",
       etiqueta: "Trabajos",
       titulo: "Más recientes",
-      texto: "Otros videos que he editado. Toca cualquiera para verlo completo.",
+      texto: "Algunos proyectos en los que he trabajado recientemente. Toca cualquier video para verlo completo.",
       columnas: "auto",
       filtros: true,
       nota: "¿Quieres ver más ejemplos de tu nicho? [Pídemelos](#contacto)",
       fondo: "normal",
       videos: [
+        {
+          titulo: "Reel promocional",
+          categoria: "Reels",
+          video: "https://drive.google.com/file/d/1lEChKCobo_hNs7IItBDpXoP-OZakmFUO/view?usp=drive_link",
+          formato: "vertical",
+        },
+        {
+          titulo: "Reel de marketing",
+          categoria: "Reels",
+          video: "https://drive.google.com/file/d/1o5zjafcEpZhvw3-PjpBZmwy0j_MqKT7Y/view?usp=drive_link",
+          formato: "vertical",
+          encuadre: "78% center",
+        },
+        {
+          titulo: "Reel de atención al cliente",
+          categoria: "Reels",
+          video: "https://drive.google.com/file/d/17tygVKcLL6figjbebs9ts9R3pL8oFfik/view?usp=drive_link",
+          formato: "vertical",
+        },
         {
           titulo: "Reel de producto",
           categoria: "Reels",
@@ -232,10 +245,10 @@ window.PORTAFOLIO = {
           formato: "vertical",
           encuadre: "78% center",
         },
+        /* Agrega aquí cualquier otro enlace que quieras solo en "Más recientes" */
       ],
     },
   ],
-
   /* =====================================================================
      7) PROYECTOS Y SUS VIDEOS (APARTE DE LAS GALERÍAS)
      Esta sección sirve para tus fichas de casos / clientes. No alimenta
