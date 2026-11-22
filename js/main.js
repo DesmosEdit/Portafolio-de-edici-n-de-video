@@ -33,7 +33,7 @@
 
   const pad = (n) => String(n).padStart(2, '0');
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const slug = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const slug = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   const cssUrl = (s) => `url("${String(s).replace(/["\\\n]/g, encodeURIComponent)}")`;
   const fmtDur = (t) => (isFinite(t) && t > 0 ? `${Math.floor(t / 60)}:${pad(Math.round(t % 60))}` : '');
   const frase = (key, fallback) => {
@@ -234,7 +234,20 @@
     });
   });
 
+  function itemsFromRaw(list, block) {
+    return (list || []).map((v) => makeItem({
+      categoria: (block && block.categoria) || 'Video',
+      ...v,
+    }, null, -1)).filter(Boolean);
+  }
+
+  /* Galerías independientes de "proyectos": si block.videos existe (aunque esté vacío),
+     usa exactamente esa lista en el orden definido en config.js. */
   function itemsForGallery(block) {
+    if (!block) return [];
+    if (Array.isArray(block.videos)) {
+      return itemsFromRaw(block.videos, block);
+    }
     const mode = String(block.cuales || 'todos').toLowerCase();
     if (mode === 'destacados') {
       const featured = projectItems.filter((it) => it.destacado);
@@ -244,13 +257,6 @@
     }
     if (mode === 'sin-destacar' || mode === 'sin destacar') return projectItems.filter((it) => !it.destacado);
     return projectItems.slice();
-  }
-
-  function itemsFromRaw(list, block) {
-    return (list || []).map((v) => makeItem({
-      categoria: (block && block.categoria) || 'Video',
-      ...v,
-    }, null, -1)).filter(Boolean);
   }
 
   function findBlock(id) {
@@ -482,7 +488,9 @@
   }
 
   function renderVideoSection(block, index) {
-    const items = block.tipo === 'videos' ? itemsFromRaw(block.videos, block) : itemsForGallery(block);
+    const items = Array.isArray(block.videos)
+      ? itemsFromRaw(block.videos, block)
+      : itemsForGallery(block);
     const cols = colsAttr(block.columnas);
     const wide = items.length > 0 && items.every((it) => it.ratio >= 1);
     const empty = frase('vacioGaleria', 'Muy pronto subiré nuevos trabajos aquí.');
@@ -890,7 +898,9 @@
     $$('.work-grid').forEach((grid) => {
       const section = grid.closest('section');
       const block = section ? findBlock(section.id) : null;
-      const items = block && block.tipo === 'videos' ? itemsFromRaw(block.videos, block) : itemsForGallery(block || {});
+      const items = block && Array.isArray(block.videos)
+        ? itemsFromRaw(block.videos, block)
+        : itemsForGallery(block || {});
       $$('.work-card', grid).forEach((card, i) => galleryItems.set(card, items[i]));
     });
   }
