@@ -176,7 +176,7 @@ window.PORTAFOLIO = {
       fondo: "normal",
       videos: [
         {
-          titulo: "Reel promocional",
+          titulo: "Banner promocional",
           categoria: "Reels",
           video: "https://drive.google.com/file/d/12Ls0Z6BI5OByFsp-hRTziNOBiqW2pNMz/view?usp=drive_link",
           formato: "vertical",
@@ -241,10 +241,7 @@ window.PORTAFOLIO = {
           categoria: "Reels",
           video: "https://drive.google.com/file/d/13dVALSzUAlCQO2eRIF0_-DodA3fPKOmk/view?usp=drive_link",
           formato: "vertical",
-        },
-         {
-         texto: "Se actualizará la galería dentro de poco con nuevos proyectos"
-       },   
+        },   
       ],
     },
     {
